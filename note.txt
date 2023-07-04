@@ -1,0 +1,172 @@
+***********************************************************
+**************** Mini eCommerce (React.js / Laravel)
+***********************************************************
+Une application e-commerce fait avec React et Laravel
+
+******************************
+## Backend API (Laravel)
+******************************
+# Créer un nouveau projet Laravel avec une préférence du dossier de distribution
+$ composer create-project --prefer-dist laravel/laravel:^9.0 ecom-backend-api
+$
+
+### Accéder au dossier du projet
+$ cd ecom-backend-api
+$
+
+### Lancer le serveur de developpement
+$ php artisan serve
+$
+
+### Installer jwt dans Laravel
+$ composer require tymon/jwt-auth
+$
+
+### Autre méthode pour installer jwt
+Ouvrez le fichier composer.json et ajoutez la dépendance suivante à la section require :
+"tymon/jwt-auth": "dev-develop"
+
+Ensuite :
+$ composer update
+$
+
+### Publier le package
+$ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+$
+
+### Générer la clé secret
+$ php artisan jwt:secret
+$ 
+
+### Créer les models / controllers / migrations
+# Currency
+$ php artisan make:model Currency -m
+$
+
+# Country
+$ php artisan make:model Country -m
+$ php artisan make:controller Api/Back/ApiCountryController
+$
+
+# City
+$ php artisan make:model City -m
+$ php artisan make:controller Api/Back/ApiCityController
+$
+
+# ContactForm
+$ php artisan make:model ContactForm -m
+$ php artisan make:controller Api/Back/ApiContactFormController
+$ php artisan make:controller Api/Front/ApiContactFormController
+$
+
+# Civility
+$ php artisan make:model Civility -m
+$
+
+# Role
+$ php artisan make:model Role -m
+$ php artisan make:controller Api/Back/ApiRoleController
+$
+
+# Admin
+$ php artisan make:model Admin -m
+$ php artisan make:controller Api/Back/ApiAdminController
+$
+
+# Product
+$ php artisan make:model Product -m
+$ php artisan make:controller Api/Back/ApiProductController
+$ php artisan make:controller Api/Front/ApiProductController
+$
+
+# Order
+$ php artisan make:model Order -m
+$ php artisan make:controller Api/Back/ApiOrderController
+$ php artisan make:controller Api/Front/ApiOrderController
+$
+
+# OrderDetail
+$ php artisan make:model OrderDetail -m
+$
+
+### Les seeders
+$ php artisan make:seeder CurrencySeeder
+$ php artisan make:seeder CountrySeeder
+$ php artisan make:seeder CitySeeder
+$ php artisan make:seeder CivilitySeeder
+$ php artisan make:seeder RoleSeeder
+$ php artisan make:seeder AdminSeeder
+$ php artisan make:seeder UserSeeder
+$ php artisan make:seeder ProductSeeder
+$
+
+### Faire la migration
+$ php artisan migrate
+$ php artisan db:seed
+$
+
+******************************
+## Frontend admin (React.js)
+******************************
+# Créer une application react (pour l'administration)
+$ npx create-react-app ecom-frontend-admin
+$ ||
+$ yarn create react-app ecom-frontend-admin
+$
+
+# Installer react-bootstrap et bootstrap
+$ npm install react-bootstrap bootstrap
+$ ||
+$ yarn add react-bootstrap bootstrap
+$
+
+# Installer bootstrap-icons
+$ npm i bootstrap-icons
+$ ||
+$ yarn add bootstrap-icons
+$
+
+# Installer react-toastify
+$ npm install --save react-toastify
+$ ||
+$ yarn add react-toastify
+$
+
+# Installer react-router-dom
+$ npm i react-router-dom
+$ ||
+$ yarn add react-router-dom
+$
+
+******************************
+## Frontend client (React.js)
+******************************
+# Créer une application react (pour les clients)
+$ npx create-react-app ecom-frontend-client
+$ ||
+$ yarn create react-app ecom-frontend-client
+$
+
+# Installer react-bootstrap et bootstrap
+$ npm install react-bootstrap bootstrap
+$ ||
+$ yarn add react-bootstrap bootstrap
+$
+
+# Installer bootstrap-icons
+$ npm i bootstrap-icons
+$ ||
+$ yarn add bootstrap-icons
+$
+
+# Installer react-toastify
+$ npm install $-save react-toastify
+$ ||
+$ yarn add react-toastify
+$
+
+# Installer react-router-dom
+$ npm i react-router-dom
+$ ||
+$ yarn add react-router-dom
+$
