@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => '/'], function ($route) {
     #... api front
     $route->group(['prefix' => 'front'], function ($route) {
-
+        
         // les routes front protégées
         require_once __DIR__ .'/api/front.php';
     });

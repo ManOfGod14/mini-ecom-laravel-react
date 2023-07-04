@@ -105,6 +105,18 @@ $ php artisan migrate
 $ php artisan db:seed
 $
 
+### Authentification
+$ php artisan make:controller Auth/ApiAuthUserController
+$
+$ php artisan make:controller Auth/ApiAuthAdminController
+$
+
+### Création des middleware dans Laravel
+$ php artisan make:middleware CheckApiFrontAuth
+$
+$ php artisan make:middleware CheckApiBackAuth
+$
+
 ******************************
 ## Frontend admin (React.js)
 ******************************
@@ -170,3 +182,42 @@ $ npm i react-router-dom
 $ ||
 $ yarn add react-router-dom
 $
+
+******************************
+## Demarrer les projets
+******************************
+Pour cloner tout le projet depuis 
+$ git clone https://github.com/ManOfGod14/mini-ecom-laravel-react.git
+$
+
+# Faire fonctionner le projet laravel
+$ cd ecom-backend-api
+$ composer install OU composer update
+$
+$ cp .env.example .env
+$ php artisan key:generate
+$
+Ensuite faire les configurations de la base de données
+$ 
+$ php artisan migrate
+$ php artisan db:seed
+$
+$ php artisan serve
+$
+
+# Faire fonctionner le projet react (frontend client)
+$ cd ecom-frontend-client
+$ npm install
+$
+$ npm start
+$
+
+# Faire fonctionner le projet react (frontend administration)
+$ cd ecom-frontend-admin
+$ npm install
+$
+$ npm start
+$
+
+
+

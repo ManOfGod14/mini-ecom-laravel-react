@@ -6,27 +6,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ApiFrontHelper {
     #...
-    static function guard() {
+    public static function guard() {
         return Auth::guard('apiuser');
     }
 
     #...
-    static function attempt($credentials) {
+    public static function attempt($credentials) {
         return Auth::guard('apiuser')->attempt($credentials);
     }
 
     #...
-    static function login($user) {
+    public static function login($user) {
         return Auth::guard('apiuser')->login($user);
     }
 
     #...
-    static function logout() {
+    public static function logout() {
         return Auth::guard('apiuser')->logout();
     }
     
     #...
-    static function currentUser($key = 'all') {
+    public static function currentUser($key = 'all') {
         if($key == 'all')
             return Auth::guard('apiuser')->user();
         
@@ -34,7 +34,7 @@ class ApiFrontHelper {
     }
 
     #...
-    static function getUserTokenAccessData() {
+    public static function getUserTokenAccessData() {
         return [
             'id' => self::currentUser('id'),
             'first_name' => self::currentUser('first_name'),

@@ -6,27 +6,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ApiBackHelper {
     #...
-    static function guard() {
+    public static function guard() {
         return Auth::guard('apiadmin');
     }
 
     #...
-    static function attempt($credentials) {
+    public static function attempt($credentials) {
         return Auth::guard('apiadmin')->attempt($credentials);
     }
 
     #...
-    static function login($user) {
+    public static function login($user) {
         return Auth::guard('apiadmin')->login($user);
     }
 
     #...
-    static function logout() {
+    public static function logout() {
         return Auth::guard('apiadmin')->logout();
     }
     
     #...
-    static function currentAdmin($key = 'all') {
+    public static function currentAdmin($key = 'all') {
         if($key == 'all')
             return Auth::guard('apiadmin')->user();
         
@@ -34,7 +34,7 @@ class ApiBackHelper {
     }
 
     #...
-    static function getAdminTokenAccessData() {
+    public static function getAdminTokenAccessData() {
         return [
             'id' => self::currentAdmin('id'),
             'first_name' => self::currentAdmin('first_name'),
