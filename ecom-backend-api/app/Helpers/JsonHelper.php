@@ -5,7 +5,7 @@ namespace App\Helpers;
 class JsonHelper {
     public static function jsonResponseSuccess($data, $message = null) {
         return response()->json([
-            'type' => 'sucess',
+            'type' => 'success',
             'message' => $message,
             'result' => $data,
         ]);

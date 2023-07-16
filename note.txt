@@ -117,6 +117,10 @@ $
 $ php artisan make:middleware CheckApiBackAuth
 $
 
+### Création du controller Global (n'ayant pas besoin d'authentification)
+$ php artisan make:controller Api/ApiGlobalController
+$
+
 ******************************
 ## Frontend admin (React.js)
 ******************************
@@ -150,6 +154,12 @@ $ ||
 $ yarn add react-router-dom
 $
 
+# Installer axios
+$ npm install axios
+$ ||
+$ yarn add axios
+$
+
 ******************************
 ## Frontend client (React.js)
 ******************************
@@ -181,6 +191,12 @@ $
 $ npm i react-router-dom
 $ ||
 $ yarn add react-router-dom
+$
+
+# Installer axios
+$ npm install axios
+$ ||
+$ yarn add axios
 $
 
 ******************************

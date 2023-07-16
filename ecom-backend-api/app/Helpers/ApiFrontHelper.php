@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ApiFrontHelper {
@@ -44,5 +45,30 @@ class ApiFrontHelper {
             'phone_number' => self::currentUser('phone_number'),
             'uri_photo' => self::currentUser('uri_photo'),
         ];
+    }
+
+    /**
+     * vérifier la disponibilité de username
+     */
+    public static function checkAvailabilityUsername($username) {
+        $userData = User::where('username', $username)->first();
+        
+        if(!empty($userData))
+            return true;
+
+        return false;
+    }
+
+    /**
+     * vérifier la disponibilité de l'adresse mail
+     */
+    public static function checkAvailabilityEmail($email) {
+        // $userData = User::where('email', $email)->first();
+        $userData = User::whereEmail($email)->first();
+        
+        if(!empty($userData))
+            return true;
+
+        return false;
     }
 }

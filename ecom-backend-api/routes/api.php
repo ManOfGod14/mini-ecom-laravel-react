@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ApiGlobalController;
+use App\Http\Controllers\Auth\ApiAuthUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +23,17 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => '/'], function ($route) {
     #... api front
     $route->group(['prefix' => 'front'], function ($route) {
-        
+        $route->group(['prefix' => 'auth'], function ($route) {
+            $route->post("login", [ApiAuthUserController::class, 'login']);
+            $route->post("register", [ApiAuthUserController::class, 'register']);
+        });
+
+        // les routes n'ayant pas besoin d'authentification
+        $route->group(['prefix' => 'globals'], function ($route) {
+            $route->get('civilities', [ApiGlobalController::class, 'getCivilities']);
+            $route->get('countries', [ApiGlobalController::class, 'getCountries']);
+        });
+
         // les routes front protégées
         require_once __DIR__ .'/api/front.php';
     });
