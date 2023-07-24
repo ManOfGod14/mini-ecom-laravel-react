@@ -160,6 +160,12 @@ $ ||
 $ yarn add axios
 $
 
+# Installer react-hook-form
+$ npm install --save react-hook-form
+$ ||
+$ yarn add react-hook-form --save
+$
+
 ******************************
 ## Frontend client (React.js)
 ******************************
@@ -197,6 +203,16 @@ $
 $ npm install axios
 $ ||
 $ yarn add axios
+$
+
+# Installer react-hook-form
+$ npm install --save react-hook-form
+$ ||
+$ yarn add react-hook-form --save
+$
+
+# Désinstaller un package dans react
+$ npm uninstall react-hook-form
 $
 
 ******************************

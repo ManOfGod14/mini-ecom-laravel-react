@@ -5,10 +5,26 @@ import React, {
 import Header from "../layouts/Header";
 import axios from "axios";
 import { notifyToTopRight } from "../../services/notifs/Toastify";
+import { useNavigate } from "react-router-dom";
+
+const initialForm = {
+    last_name: '',
+    first_name: '',
+    username: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+    civility_id: '',
+    country_id: '',
+    city_name: '',
+    phone_number: ''
+}
 
 function Inscription() {
     const [civilities, setCivilities] = useState([])
     const [countries, setCountries] = useState([])
+    const [formState, setFormState] = useState(initialForm)
+    const navigate = useNavigate();
 
     // axios.get('http://127.0.0.1:8000/api/front/globals/civilities', {
     //     headers: {
@@ -54,7 +70,47 @@ function Inscription() {
 
     const handleChange = (e) => {
         e.preventDefault()
-        console.log(e.target.value)
+        // console.log(e.target.value)
+
+        // const fieldName = e.target.name
+        // const fieldType = e.target.type
+        // const fieldValue = e.target.value
+        // const fieldChecked = e.target.checked
+
+        const {name, type, value, checked} = e.target
+        setFormState({
+            ...formState,
+            [name]: (type === 'checkbox') ? checked : value,
+        })
+    }
+
+    const sendFormDataToApi = async (data) => {
+        try {
+            const response = await axios.post(process.env.REACT_APP_FRONT_API_URL+'auth/register', data)
+            // console.log(response)
+            if(response.data) {
+                if(response.data.type === 'success') {
+                    setFormState(initialForm)
+                    
+                    navigate('/auth/login')
+                    notifyToTopRight('success', response.data.message)
+
+                    window.location.reload()
+                } else {
+                    notifyToTopRight('error', response.data.message)
+                }
+            } else {
+                notifyToTopRight('error', "Quelque chose s'est mal passée !")
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // console.log(e)
+        sendFormDataToApi(formState)
     }
 
     // gérer le cycle de vie du composant (montage et démontage)
@@ -74,15 +130,15 @@ function Inscription() {
 
         <div className="container py-3">
             <h1 className="text-center">Formulaire d'inscription</h1>
-
-            <form action="" method="post">
+            
+            <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="form-group col-md-6 mb-3">
                         <label htmlFor="last_name">
                             Nom de famille <span className="text-danger">*</span>
                         </label>
                         <input type="text" name="last_name" id="last_name" className="form-control" required 
-                            value={''}
+                            value={formState?.last_name}
                             onChange={handleChange}
                         />
                     </div>
@@ -92,7 +148,7 @@ function Inscription() {
                             Prénom(s) <span className="text-danger">*</span>
                         </label>
                         <input type="text" name="first_name" id="first_name" className="form-control" required 
-                            value={''}
+                            value={formState?.first_name}
                             onChange={handleChange}
                         />
                     </div>
@@ -102,7 +158,7 @@ function Inscription() {
                             Username <span className="text-danger">*</span>
                         </label>
                         <input type="text" name="username" id="username" className="form-control" required 
-                            value={''}
+                            value={formState?.username}
                             onChange={handleChange}
                         />
                     </div>
@@ -112,7 +168,7 @@ function Inscription() {
                             Email <span className="text-danger">*</span>
                         </label>
                         <input type="email" name="email" id="email" className="form-control" required 
-                            value={''}
+                            value={formState?.email}
                             onChange={handleChange}
                         />
                     </div>
@@ -122,7 +178,7 @@ function Inscription() {
                             Password <span className="text-danger">*</span>
                         </label>
                         <input type="password" name="password" id="password" className="form-control" required 
-                            value={''}
+                            value={formState?.password}
                             onChange={handleChange}
                         />
                     </div>
@@ -132,7 +188,7 @@ function Inscription() {
                             Confirm Password <span className="text-danger">*</span>
                         </label>
                         <input type="password" name="password_confirmation" id="password_confirmation" className="form-control" required 
-                            value={''}
+                            value={formState?.password_confirmation}
                             onChange={handleChange}
                         />
                         <div className="py-1">
@@ -144,7 +200,9 @@ function Inscription() {
                         <label htmlFor="civility_id">
                             Civility (Sex) <span className="text-danger">*</span>
                         </label>
-                        <select name="civility_id" id="civility_id" className="form-select" required onChange={handleChange}>
+                        <select name="civility_id" id="civility_id" className="form-select" required 
+                            onChange={handleChange}
+                        >
                             <option value="">-- Sélectionnez le sex --</option>
                             {
                                 civilities.map((civilityItem, civilityIndex) => {
@@ -160,7 +218,9 @@ function Inscription() {
                         <label htmlFor="country_id">
                             Votre pays <span className="text-danger">*</span>
                         </label>
-                        <select name="country_id" id="country_id" className="form-select" required onChange={handleChange}>
+                        <select name="country_id" id="country_id" className="form-select" required 
+                            onChange={handleChange}
+                        >
                             <option value="">-- Sélectionnez le pays --</option>
                             {
                                 countries.map((countryItem, countryIndex) => {
@@ -177,7 +237,7 @@ function Inscription() {
                             Ville de résidence <span className="text-danger">*</span>
                         </label>
                         <input type="text" name="city_name" id="city_name" className="form-control" required 
-                            value={''}
+                            value={formState?.city_name}
                             onChange={handleChange}
                         />
                     </div>
@@ -187,7 +247,7 @@ function Inscription() {
                             N° de téléphone <span className="text-danger">*</span>
                         </label>
                         <input type="text" name="phone_number" id="phone_number" className="form-control" required 
-                            value={''}
+                            value={formState?.phone_number}
                             onChange={handleChange}
                         />
                     </div>
@@ -199,6 +259,10 @@ function Inscription() {
                     </div>
                 </div>
             </form>
+        </div>
+
+        <div className="p-3">
+            {JSON.stringify(formState)}
         </div>
     </>
 }

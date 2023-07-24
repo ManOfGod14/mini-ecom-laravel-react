@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 // to top right notify
-export function  notifyToTopRight(type, content) {
+export function notifyToTopRight(type, content) {
     switch (type) {
         case 'info' : 
             toast.info(content, {
